@@ -11,6 +11,18 @@ on:
             description: 'Giá trị B'
             required: true
             default: "2"
+        var_C:
+            description: 'Giá trị C'
+            required: true
+            type: choice
+            options:
+              - "1"
+              - "2"
+              - "3"
+              - "4"
+              - "5"
+            default: "2"
+
 
 jobs:
   say-hello:

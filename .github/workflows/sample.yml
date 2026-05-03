@@ -63,8 +63,8 @@ jobs:
       - name: Step 1 - Say hello
         env:
           var_A: ${{ github.event.inputs.var_A || env.default_A }}
+          var_BB: ${{needs.say-hello.outputs.result}}
         run: |
-            var_BB=${{needs.say-hello.outputs.result}}
             result=$(($var_A + $var_BB))
             echo "The result of A + B is: $result" 
             echo "The value of C is: $var_C"

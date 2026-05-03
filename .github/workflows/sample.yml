@@ -89,4 +89,9 @@ jobs:
         run: echo "Goodbye, world!"
       - name: Step 3 - Final step
         run: echo "This is the final step of the workflow."
+      - name: Step 1.5 - Upload log
+        uses: actions/upload-artifact@v4
+        with:
+          name: math-log
+          path: log.txt
     

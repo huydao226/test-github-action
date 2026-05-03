@@ -26,6 +26,10 @@ on:
     branches:
       - main
     
+env:
+  var_A: "10"  
+  var_B: ${{ vars.VarB }}
+  var_C: ${{ secrets.SecretC }} 
 
 
 jobs:
@@ -35,6 +39,6 @@ jobs:
     steps:
       - name: Step 1 - Say hello
         run: |
-            result=$((${{ github.event.inputs.var_A }} + ${{ github.event.inputs.var_B }}))
+            result=$(($var_A + $var_B))
             echo "The result of A + B is: $result" 
     

@@ -75,6 +75,7 @@ jobs:
   job-three:
     runs-on: ubuntu-latest
     needs: say-hello
+    if: needs.say-hello.outputs.result == '15' # Chỉ chạy nếu kết quả của job say-hello là 3
     steps:
       - name: Step 1 - Say hello
         env:

@@ -1,12 +1,12 @@
-name: Sample Workflow
+name: Simple Math CI
 
 on:
-    workflow_dispatch:  
+  workflow_dispatch:
 
 jobs:
-    say-hello:
-        runs-on: ubuntu-latest
+  say-hello:
+    runs-on: ubuntu-latest
 
-        steps:
-            - name: Say Hello
-              run: echo "Hello, World!"
+    steps:
+      - name: Step 1 - Say hello
+        run: echo "Hello GitHub Actions"

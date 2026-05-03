@@ -25,7 +25,11 @@ on:
   push:
     branches:
       - main
-    
+  schedule:
+    - cron: "1 20 * * *"
+  repository_dispatch:
+    types: [run-test, deploy, sync-data] # Chạy hàng ngày vào lúc 00:00
+
 env:
   default_A: "10"  
   default_B: ${{ vars.VarB }}
@@ -34,8 +38,7 @@ env:
 
 jobs:
   say-hello:
-    runs-on: ubunti-latest
-
+    runs-on: ubuntu-latest
     steps:
       - name: Step 1 - Say hello
         env:
@@ -46,4 +49,24 @@ jobs:
             result=$(($var_A + $var_B))
             echo "The result of A + B is: $result" 
             echo "The value of C is: $var_C"
+      - name: Step 2 - Say goodbye
+        run: echo "Goodbye, world!"
+      - name: Step 3 - Final step
+        run: echo "This is the final step of the workflow."
+  job-two:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Step 1 - Say hello
+        env:
+          var_A: ${{ github.event.inputs.var_A || env.default_A }}
+          var_B: ${{ github.event.inputs.var_B || env.default_B }}
+          var_C: ${{ github.event.inputs.var_C || env.default_C }}
+        run: |
+            result=$(($var_A + $var_B))
+            echo "The result of A + B is: $result" 
+            echo "The value of C is: $var_C"
+      - name: Step 2 - Say goodbye
+        run: echo "Goodbye, world!"
+      - name: Step 3 - Final step
+        run: echo "This is the final step of the workflow."
     

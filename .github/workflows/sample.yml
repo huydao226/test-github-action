@@ -52,6 +52,7 @@ jobs:
             result=$(($var_A + $var_B))
             echo "The result of A + B is: $result" 
             echo "The value of C is: $var_C"
+            echo "result=$result" >> $GITHUB_OUTPUT
       - name: Step 2 - Say goodbye
         run: echo "Goodbye, world!"
       - name: Step 3 - Final step

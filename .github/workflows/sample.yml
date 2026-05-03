@@ -27,18 +27,23 @@ on:
       - main
     
 env:
-  var_A: "10"  
-  var_B: ${{ vars.VarB }}
-  var_C: ${{ secrets.SecretC }} 
+  default_A: "10"  
+  default_B: ${{ vars.VarB }}
+  default_C: ${{ secrets.SecretC }} 
 
 
 jobs:
   say-hello:
-    runs-on: ubuntu-latest
+    runs-on: ubunti-latest
 
     steps:
       - name: Step 1 - Say hello
+        env:
+          var_A: ${{ github.event.inputs.var_A || env.default_A }}
+          var_B: ${{ github.event.inputs.var_B || env.default_B }}
+          var_C: ${{ github.event.inputs.var_C || env.default_C }}
         run: |
             result=$(($var_A + $var_B))
             echo "The result of A + B is: $result" 
+            echo "The value of C is: $var_C"
     

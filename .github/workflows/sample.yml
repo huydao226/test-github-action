@@ -85,6 +85,7 @@ jobs:
             result=$(($var_A + ${{needs.say-hello.outputs.result}}))
             echo "The result of A + B is: $result" 
             echo "The value of C is: $var_C"
+            echo "RESULT=$result" >> log.txt
       - name: Step 2 - Say goodbye
         run: echo "Goodbye, world!"
       - name: Step 3 - Final step

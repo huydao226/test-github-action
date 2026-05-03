@@ -22,6 +22,10 @@ on:
               - "4"
               - "5"
             default: "2"
+  push:
+    branches:
+      - main
+    
 
 
 jobs:

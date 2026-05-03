@@ -2,6 +2,15 @@ name: Simple Math CI
 
 on:
   workflow_dispatch:
+    inputs: 
+        var_A:
+            description: 'Giá trị A'
+            required: true
+            default: "1"
+        var_B:
+            description: 'Giá trị B'
+            required: true
+            default: "2"
 
 jobs:
   say-hello:
@@ -9,4 +18,7 @@ jobs:
 
     steps:
       - name: Step 1 - Say hello
-        run: echo "Hello GitHub Actions"
+        run: |
+            result=$((${{ github.event.inputs.var_A }} + ${{ github.event.inputs.var_B }}))
+            echo "The result of A + B is: $result" 
+    

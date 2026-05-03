@@ -39,8 +39,11 @@ env:
 jobs:
   say-hello:
     runs-on: ubuntu-latest
+    outputs:
+      result: ${{ steps.say-hello.outputs.result }}
     steps:
       - name: Step 1 - Say hello
+        id: say-hello
         env:
           var_A: ${{ github.event.inputs.var_A || env.default_A }}
           var_B: ${{ github.event.inputs.var_B || env.default_B }}
@@ -60,10 +63,8 @@ jobs:
       - name: Step 1 - Say hello
         env:
           var_A: ${{ github.event.inputs.var_A || env.default_A }}
-          var_B: ${{ github.event.inputs.var_B || env.default_B }}
-          var_C: ${{ github.event.inputs.var_C || env.default_C }}
         run: |
-            result=$(($var_A + $var_B))
+            result=$(($var_A + ${{needs.say-hello.outputs.result}}))
             echo "The result of A + B is: $result" 
             echo "The value of C is: $var_C"
       - name: Step 2 - Say goodbye
